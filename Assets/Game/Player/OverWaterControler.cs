@@ -9,15 +9,18 @@ public class OverWaterControler : Controler
 	[SerializeField] float velocity;
 	public Rigidbody2D _rigidbody2D { get; set; }
 	public Transform feet;
-	public float currentTime;
+	float currentTime;
+	[SerializeField] WaterGun waterGun;
+
 	private void OnEnable()
 	{
-		if (swipe == null) swipe = GameManager.Instance.swipe;
+		swipe = GameManager.Instance.swipe;
 		swipe.OnMoveSwipe1.AddListener(FirstShot);
 		swipe.OnMoveSwipe2.AddListener(SecondShot);
 
 		swipe.OnEndSwipe1.AddListener(FirstJump);
 		swipe.OnEndSwipe2.AddListener(SecondJump);
+		waterGun.gameObject.SetActive(true);
 	}
 	private void OnDisable()
 	{
@@ -26,7 +29,8 @@ public class OverWaterControler : Controler
 
 		swipe.OnEndSwipe1.RemoveListener(FirstJump);
 		swipe.OnEndSwipe2.RemoveListener(SecondJump);
-	}
+        waterGun.gameObject.SetActive(false);
+    }
 
 	
 	public void FirstShot(Vector2 v)
@@ -36,7 +40,10 @@ public class OverWaterControler : Controler
 			currentTime += Time.deltaTime;
 			if (currentTime > 0.1f)
 			{
-				print("Shot");
+
+				var direction = Camera.main.ScreenToWorldPoint(v);
+				waterGun.GunRotate((direction - transform.position).normalized, transform.localScale.x > 0);
+				waterGun.Shot();
 			}
 		}
 	}
@@ -45,8 +52,10 @@ public class OverWaterControler : Controler
 		currentTime += Time.deltaTime;
 		if (currentTime > 0.1f) 
 		{
-			print("Shot");
-		}
+            var direction = Camera.main.ScreenToWorldPoint(v);
+            waterGun.GunRotate((direction - transform.position).normalized, transform.localScale.x > 0);
+            waterGun.Shot();
+        }
 	}
 	public void FirstJump(Vector2 v) 
 	{
@@ -71,8 +80,16 @@ public class OverWaterControler : Controler
 	}
 	public override void Move()
 	{
+
 		var move = new Vector2(joyStick.Direction.x * velocity, _rigidbody2D.velocity.y);
 		_rigidbody2D.velocity = move;
+		if (Mathf.Abs(joyStick.Direction.x) > 0.4)
+		{
+			var dir = joyStick.Direction.x;
+			transform.localScale = new Vector3(dir > 0 ? Mathf.Abs(transform.localScale.x) : -Mathf.Abs(transform.localScale.x),
+				transform.localScale.y,
+				transform.localScale.z);
+		}
 	}
 	public bool CheckGround() 
 	{
