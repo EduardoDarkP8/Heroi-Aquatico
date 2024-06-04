@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public BossAtack[] atacks;
+    public PlayerManager manager;
+    public void BossAtack(int i) 
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        atacks[i].bossManager = this;
+        atacks[i].playerManager = manager;
+        StartCoroutine(atacks[i].AtackRoutine());
     }
 }

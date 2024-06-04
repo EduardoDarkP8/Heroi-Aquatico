@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAtack : MonoBehaviour
+public abstract class BossAtack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerManager playerManager { get; set; }
+    public BossManager bossManager { get; set; }
+    public virtual IEnumerator AtackRoutine()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        yield return null;
     }
 }
