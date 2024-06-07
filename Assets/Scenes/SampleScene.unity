@@ -4633,6 +4633,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1592700352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7614320432269027962, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
+  m_PrefabInstance: {fileID: 4773966973200721515}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1592700355
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592700352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e17bda8707f3e674a902a2a621d3dcf7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1672003482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5421,6 +5447,10 @@ PrefabInstance:
       propertyPath: bulletSource
       value: 
       objectReference: {fileID: 243937138}
+    - target: {fileID: 6699712960563071186, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
+      propertyPath: initalType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6904695514986779767, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
       propertyPath: joyStick
       value: 
@@ -5429,6 +5459,10 @@ PrefabInstance:
       propertyPath: moveSound
       value: 
       objectReference: {fileID: 8300000, guid: d36545b7b2506b84995f3490089ba329, type: 3}
+    - target: {fileID: 7423228587955403201, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1147953197, guid: 9370855d98f9753428453c8244bf2765, type: 3}
     - target: {fileID: 9209068363923898856, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5477,6 +5511,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7614320432269027962, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1592700355}
     - targetCorrespondingSourceObject: {fileID: 8756702101124764831, guid: 5d0bd9f06b85e8243a32e0db909524ed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 243937138}
