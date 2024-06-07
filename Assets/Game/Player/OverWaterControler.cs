@@ -10,7 +10,8 @@ public class OverWaterControler : Controler
 	public Rigidbody2D _rigidbody2D { get; set; }
 	public Transform feet;
 	float currentTime;
-	[SerializeField] WaterGun waterGun;
+	public WaterGun waterGun;
+	bool joyStickSelect;
 
 	private void OnEnable()
 	{
@@ -35,7 +36,7 @@ public class OverWaterControler : Controler
 	
 	public void FirstShot(Vector2 v)
 	{
-		if (Mathf.Abs(joyStick.Direction.y) + Mathf.Abs(joyStick.Direction.x) <= 0.1)
+		if (Mathf.Abs(joyStick.Direction.y) + Mathf.Abs(joyStick.Direction.x) <= 0.01)
 		{
 			currentTime += Time.deltaTime;
 			if (currentTime > 0.1f)
@@ -43,7 +44,7 @@ public class OverWaterControler : Controler
 
 				var direction = Camera.main.ScreenToWorldPoint(v);
 				waterGun.GunRotate((direction - transform.position).normalized, transform.localScale.x > 0);
-				waterGun.Shot();
+				waterGun.Shot(transform.localScale.x);
 			}
 		}
 	}
@@ -54,34 +55,45 @@ public class OverWaterControler : Controler
 		{
             var direction = Camera.main.ScreenToWorldPoint(v);
             waterGun.GunRotate((direction - transform.position).normalized, transform.localScale.x > 0);
-            waterGun.Shot();
+            waterGun.Shot(transform.localScale.x);
         }
 	}
 	public void FirstJump(Vector2 v) 
 	{
-		if (Mathf.Abs(joyStick.Direction.y) + Mathf.Abs(joyStick.Direction.x) <= 0.1)
+		
+		if (!joyStickSelect)
 		{
 			currentTime += Time.deltaTime;
-			if (currentTime < 0.1f)
+			if (currentTime < 0.1f && CheckGround())
 			{
-				print("Jump");
+				Jump();
 			}
 		}
+		joyStickSelect = false;
 		currentTime = 0;
 	}
 	public void SecondJump(Vector2 v)
 	{
 		currentTime += Time.deltaTime;
-		if (currentTime < 0.1f)
+		if (currentTime < 0.1f && CheckGround())
 		{
-			print("Jump");
+			Jump();
 		}
 		currentTime = 0;
 	}
+	public void Jump() 
+	{
+		_rigidbody2D.AddForce(Vector2.up*7,ForceMode2D.Impulse);
+	}
 	public override void Move()
 	{
-
 		var move = new Vector2(joyStick.Direction.x * velocity, _rigidbody2D.velocity.y);
+		if (move != Vector2.zero)
+		{
+			joyStickSelect = transform;
+			isMoving = true;
+		}
+		else isMoving = false;
 		_rigidbody2D.velocity = move;
 		if (Mathf.Abs(joyStick.Direction.x) > 0.4)
 		{

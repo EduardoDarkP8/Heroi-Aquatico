@@ -5,14 +5,19 @@ using UnityEngine;
 public class BossBullet : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.TryGetComponent(out PlayerManager playerManager)) playerManager.ChangeLife(1);
+		Destroy(gameObject);
     }
     public void SetTarget(Vector3 directio) 
     {
-        rb.velocity = directio * 3;
+        if (rb != null) 
+        { 
+		rb.velocity = directio * 3;
+		Destroy(gameObject, 10f);
+        }
     }
 
 }

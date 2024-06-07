@@ -23,14 +23,17 @@ public class UnderWaterControler : Controler
 	{
 		if (Mathf.Abs(joyStick.Direction.y) + Mathf.Abs(joyStick.Direction.x) >= 0.1)
 		{
+			_rigidbody2D.constraints = RigidbodyConstraints2D.None;
 			var move = Mathf.Clamp(Mathf.Abs(joyStick.Direction.y) + Mathf.Abs(joyStick.Direction.x), 0, 1);
 			_rigidbody2D.velocity = _rigidbody2D.transform.up * velocity * move;
 			float angle = Mathf.Atan2(joyStick.Direction.y, joyStick.Direction.x) * Mathf.Rad2Deg;
 			transform.eulerAngles = new Vector3(0, 0, angle - 90);
+			isMoving = true;
 			return;
 		}
 		_rigidbody2D.velocity = Vector2.zero;
-
+		_rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+		isMoving = false;
 	}
 	
 	public override void Action()

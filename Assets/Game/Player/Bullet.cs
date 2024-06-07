@@ -8,11 +8,15 @@ public class Bullet : MonoBehaviour
     [SerializeField]SpriteRenderer rbSprite;
     [SerializeField]Collider2D _collider;
     [SerializeField]TrailRenderer _trailRenderer;
-    private void OnEnable()
+    public void Impulse(float direction)
     {
-        
-        rb.AddForce(transform.right*1000);
-        StartCoroutine(DestroyRay(3f));
+        if (direction > 0) 
+        { 
+            rb.AddForce(transform.right * 1000);
+        }
+        else rb.AddForce(transform.right * -1000);
+
+		StartCoroutine(DestroyRay(3f));
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Controler : MonoBehaviour
 {
+    public AudioClip moveSound;
+    public bool isMoving { get; protected set; }
 	public virtual void GetInput()
 	{
 

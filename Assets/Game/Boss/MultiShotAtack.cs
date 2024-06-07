@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MultiShotAtack : BossAtack
 {
-    BossBullet prefab;
-    Transform[] shotPoints;
+    [SerializeField] BossBullet prefab;
+	[SerializeField] Transform[] shotPoints;
 
     public override IEnumerator AtackRoutine()
     {
@@ -17,8 +17,11 @@ public class MultiShotAtack : BossAtack
         }
         foreach (var b in list)
         {
+            if (b != null) 
+            { 
             b.SetTarget((playerManager.transform.position - transform.position).normalized);
             yield return new WaitForSeconds(0.3f);
+            }
         }
         bossManager.BossAtack(Random.Range(0,3));
     }

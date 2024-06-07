@@ -7,13 +7,20 @@ public class WaterGun : MonoBehaviour
     [SerializeField]Transform shotPoint;
     [SerializeField]float coolDown;
     bool canShot = true;
-    [SerializeField] Bullet bullet; 
-    public void Shot() 
+    [SerializeField] Bullet bullet;
+    [SerializeField] AudioSource bulletSource;
+    
+    public void Shot(float velocity) 
     {
         if (canShot) 
         {
+            if (!bulletSource.isPlaying) 
+            { 
+                bulletSource.Play();
+            }
             canShot = false;
-            Instantiate(bullet,shotPoint.position, shotPoint.rotation);
+            var b = Instantiate(bullet,shotPoint.position, shotPoint.rotation);
+            b.Impulse(velocity);
             StartCoroutine(ShotWait());
         }
     }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class BossAtack : MonoBehaviour
 {
-    public PlayerManager playerManager { get; set; }
-    public BossManager bossManager { get; set; }
+    [SerializeField]protected PlayerManager playerManager;
+	[SerializeField] protected BossManager bossManager;
     public virtual IEnumerator AtackRoutine()
     {
         yield return null;
