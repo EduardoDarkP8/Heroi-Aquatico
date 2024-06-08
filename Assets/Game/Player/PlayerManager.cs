@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerManager : MonoBehaviour
 	[SerializeField]int life;
 	[SerializeField] ControlerType initalType;
 	public AudioSource audioSource;
+	public Animator anim;
 	private void Start()
 	{
 		SwitchWaterControl(initalType);
@@ -29,7 +31,8 @@ public class PlayerManager : MonoBehaviour
 				_rigidbody2D.gravityScale = 1;
 				overWaterControler.waterGun.gameObject.SetActive(true);
 				_rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-				
+				anim.SetBool("Nadando", false);
+
 				break;
 			case ControlerType.swim: 
 				currentControler = underWaterControler;
@@ -38,22 +41,24 @@ public class PlayerManager : MonoBehaviour
 				overWaterControler.enabled = false;
 				_rigidbody2D.gravityScale = 0;
 				_rigidbody2D.constraints = RigidbodyConstraints2D.None;
+				anim.SetBool("Nadando", true);
 				break;
 
 		}
 	}
 	public void ChangeLife(int delta) 
 	{
+
 		life -= delta;
 		if (life <= 0) 
 		{
-			Destroy(gameObject);
+			SceneManager.LoadScene("Menu");
 		}
 	}
 	private void FixedUpdate()
 	{
 		currentControler.Move();
-		
+		anim.SetFloat("Move", Mathf.Abs(_rigidbody2D.velocity.x));
 	}
 	private void Update()
 	{

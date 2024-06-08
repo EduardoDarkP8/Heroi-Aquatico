@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSound: {fileID: 0}
-  shotSound: {fileID: 0}
   joyStick: {fileID: 0}
   velocity: 4
 --- !u!114 &1226545503188003832
@@ -154,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSound: {fileID: 0}
-  shotSound: {fileID: 0}
   joyStick: {fileID: 0}
   velocity: 4.5
   feet: {fileID: 1373228343399264287}
@@ -177,6 +175,7 @@ MonoBehaviour:
   life: 5
   initalType: 1
   audioSource: {fileID: 3479049973931044226}
+  anim: {fileID: 0}
 --- !u!50 &2725217269468095234
 Rigidbody2D:
   serializedVersion: 4
@@ -529,3 +528,4 @@ MonoBehaviour:
   shotPoint: {fileID: 6391605074237296371}
   coolDown: 0.2
   bullet: {fileID: 4609382806785125041, guid: e1fc7cc1f97dba2468c8d7ea8ff4d5bd, type: 3}
+  bulletSource: {fileID: 0}
