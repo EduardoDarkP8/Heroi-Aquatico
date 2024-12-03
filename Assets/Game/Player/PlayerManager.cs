@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
 	[SerializeField]int life;
 	[SerializeField] ControlerType initalType;
 	public AudioSource audioSource;
+	public AudioSource damageAudioSource;
 	public Animator anim;
 	private void Start()
 	{
@@ -50,6 +51,7 @@ public class PlayerManager : MonoBehaviour
 	{
 
 		life -= delta;
+		damageAudioSource.Play();
 		if (life <= 0) 
 		{
 			SceneManager.LoadScene("Menu");

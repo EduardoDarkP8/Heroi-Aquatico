@@ -5,6 +5,10 @@ using UnityEngine;
 public class BossBullet : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] Rigidbody2D rb2;
+	[SerializeField] AudioSource source;
+	[SerializeField] Collider2D _collider;
+	[SerializeField] SpriteRenderer _renderer;
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -16,8 +20,9 @@ public class BossBullet : MonoBehaviour
         if (rb != null) 
         { 
 		rb.velocity = directio * 3;
-		Destroy(gameObject, 10f);
-        }
-    }
+			Destroy(gameObject, 10f);
+
+		}
+	}
 
 }

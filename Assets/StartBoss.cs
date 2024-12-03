@@ -12,6 +12,8 @@ public class StartBoss : MonoBehaviour
 		{
 			StartCoroutine(bossManager.atacks[0].AtackRoutine());
 			_collider.enabled = false;
+			Trash[] latas = FindObjectsByType<Trash>(FindObjectsSortMode.None);
+			foreach (var l in latas) Destroy(l.gameObject);
 			Destroy(gameObject,8f);
 		}
 	}

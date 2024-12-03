@@ -6,6 +6,9 @@ public class Trash : MonoBehaviour
 {
 	[SerializeField] Rigidbody2D _rigidbody2D;
 	Vector2 velocity;
+	[SerializeField] AudioSource source;
+	[SerializeField] Collider2D _collider;
+	[SerializeField] SpriteRenderer _renderer;
 	public TrashSpawner spawner { get; set; }
 	private void Start()
 	{
@@ -17,13 +20,17 @@ public class Trash : MonoBehaviour
 	{
 		if (collision.gameObject.TryGetComponent(out PlayerManager playerManager))
 		{
+			source.Play();
+			_collider.enabled = false;
+			_renderer.enabled = false;
+
 			playerManager.ChangeLife(1);
-			spawner.SpwanTrash();
-			Destroy(gameObject);
+			spawner.DelaySpwan();
+			Destroy(gameObject, 2);
 		}
 
 		velocity = -velocity;
-		
+		source.Play();
 		_rigidbody2D.velocity = velocity;
 	}
 }
